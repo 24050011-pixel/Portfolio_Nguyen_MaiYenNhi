@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0a0a0a;
+  color: #f2f2f2;
+  overflow-x: hidden;
+  animation: fadeIn 1.2s ease-in-out;
+  position: relative;
+}
+.avatar img{
+  width: 140px;
+  height: 140px;
+  border-radius: 100%;
+  margin-left: 50px;
+  /* object-fit: cover; */
+ 
+}
+
+/* Hiệu ứng nền bokeh */
+.background {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at 20% 20%, rgba(255,0,0,0.2), transparent 60%),
+              radial-gradient(circle at 80% 80%, rgba(255,50,50,0.2), transparent 60%),
+              radial-gradient(circle at 40% 70%, rgba(255,0,0,0.15), transparent 60%);
+  filter: blur(80px);
+  animation: bokehMove 15s infinite alternate ease-in-out;
+  z-index: 0;
+}
+@keyframes bokehMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-50px, 50px); }
+}
+
+/* Bố cục tổng thể */
+.cv-container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 50px auto;
+  background: rgba(20, 20, 20, 0.85);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
+}
+
+.left-column {
+  background: linear-gradient(180deg, #1a0000, #000);
+  padding: 2rem;
+}
+.right-column { padding: 2rem; }
+
+
+
+/* Tiêu đề */
+h1 { font-size: 1.4rem; color: #ff4d4d; }
+h2 { font-size: 1rem; color: #ccc; margin-bottom: 1.5rem; }
+h3 {
+  margin-top: 1.5rem;
+  color: #ff4d4d;
+  border-bottom: 1px solid #ff4d4d;
+  padding-bottom: 0.4rem;
+}
+
+/* Tags / kỹ năng */
+.tags span {
+  background: rgba(255, 0, 0, 0.2);
+  color: #ff9999;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin: 3px;
+  display: inline-block;
+  font-size: 0.85rem;
+  transition: transform 0.2s;
+}
+.tags span:hover {
+  transform: scale(1.1);
+  background: rgba(255, 0, 0, 0.4);
+}
+
+/* Nút tải PDF */
+.download { text-align: right; margin-bottom: 1rem; }
+.download button {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.download button:hover {
+  background: #ff6666;
+  transform: scale(1.05);
+}
+
+/* Thanh kỹ năng */
+.progress {
+  background: #222;
+  border-radius: 10px;
+  height: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.bar {
+  background: linear-gradient(90deg, #ff0000, #ff4d4d);
+  height: 100%;
+  border-radius: 10px;
+  width: 0;
+  animation: fillBar 1.5s forwards;
+}
+@keyframes fillBar {
+  to { width: var(--percent, 80%); }
+}
+
+/* Section tách rõ ràng */
+section {
+  border-bottom: 1px solid rgba(255, 77, 77, 0.2);
+  padding-bottom: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Hiệu ứng mờ vào */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Khi in PDF */
+@media print {
+  body { background: white; color: black; }
+  .background { display: none; }
+  .cv-container {
+    box-shadow: none;
+    background: white;
+  }
+  .download { display: none; }
+}
